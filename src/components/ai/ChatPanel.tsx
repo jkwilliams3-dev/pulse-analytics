@@ -67,20 +67,17 @@ export default function ChatPanel() {
     });
   };
 
+  if (!isChatOpen) return null;
+
   return (
     <div
-      className={`flex flex-col border-l border-slate-800 ${isChatOpen ? 'animate-slide-in-right' : ''}`}
+      className="flex flex-col border-l border-slate-800"
       style={{
-        width: '384px',
+        width: '360px',
         flexShrink: 0,
-        backgroundColor: '#0f172a',
-        display: isChatOpen ? 'flex' : 'none',
-        height: '100vh',
-        position: 'fixed',
-        right: 0,
-        top: 0,
-        zIndex: 50,
-        boxShadow: '-4px 0 30px rgba(0,0,0,0.4)',
+        backgroundColor: '#0d1117',
+        height: '100%',
+        overflow: 'hidden',
       }}
     >
       {/* Header */}

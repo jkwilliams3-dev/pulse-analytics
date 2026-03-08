@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppStore } from '../../store/useAppStore';
 
@@ -7,97 +8,171 @@ const pageTitles: Record<string, string> = {
   '/settings': 'Settings',
 };
 
+const NOTIFICATIONS = [
+  { id: 1, title: 'Revenue milestone hit', body: 'Monthly revenue crossed $140K', time: '2m ago', unread: true },
+  { id: 2, title: 'Conversion rate drop', body: 'Conversion fell 0.3% vs last week', time: '1h ago', unread: true },
+  { id: 3, title: 'New report ready', body: 'Q1 traffic analysis is available', time: '3h ago', unread: false },
+  { id: 4, title: 'User spike detected', body: 'Active users +18% in last hour', time: '5h ago', unread: false },
+];
+
 export default function TopBar() {
   const { toggleSidebar, toggleChat, isChatOpen } = useAppStore();
   const location = useLocation();
   const title = pageTitles[location.pathname] ?? 'Dashboard';
 
+  const [notifOpen, setNotifOpen] = useState(false);
+  const [userOpen, setUserOpen] = useState(false);
+  const notifRef = useRef<HTMLDivElement>(null);
+  const userRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (notifRef.current && !notifRef.current.contains(e.target as Node)) setNotifOpen(false);
+      if (userRef.current && !userRef.current.contains(e.target as Node)) setUserOpen(false);
+    }
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const unreadCount = NOTIFICATIONS.filter(n => n.unread).length;
+
   return (
     <header
-      className="border-b border-slate-800 flex items-center justify-between px-6"
-      style={{
-        height: '64px',
-        backgroundColor: 'rgba(15, 23, 42, 0.95)',
-        backdropFilter: 'blur(8px)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 40,
-        flexShrink: 0,
-      }}
+      className="flex items-center justify-between px-5 border-b border-slate-800"
+      style={{ height: '64px', flexShrink: 0, backgroundColor: '#0f1117', position: 'relative', zIndex: 40 }}
     >
-      {/* Left side */}
-      <div className="flex items-center gap-4">
+      {/* Left */}
+      <div className="flex items-center gap-3">
         <button
           onClick={toggleSidebar}
           className="text-slate-400 hover:text-slate-200 p-2 rounded-lg hover:bg-slate-800 transition-colors"
           aria-label="Toggle sidebar"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="18" x2="21" y2="18" />
+            <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
           </svg>
         </button>
         <div className="flex items-center gap-2 text-sm text-slate-500">
-          <span>StreamlineAI</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
+          <span>Pulse</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
           <span className="text-slate-200 font-medium">{title}</span>
         </div>
       </div>
 
-      {/* Right side */}
-      <div className="flex items-center gap-2">
+      {/* Right */}
+      <div className="flex items-center gap-1">
         {/* AI Chat toggle */}
         <button
           onClick={toggleChat}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+          className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer"
           style={{
-            background: isChatOpen
-              ? 'rgba(99, 102, 241, 0.2)'
-              : 'transparent',
-            color: isChatOpen ? '#818cf8' : '#94a3b8',
-            border: isChatOpen ? '1px solid rgba(99,102,241,0.4)' : '1px solid transparent',
+            background: isChatOpen ? 'rgba(47,129,247,0.15)' : 'transparent',
+            color: isChatOpen ? '#2f81f7' : '#94a3b8',
+            border: isChatOpen ? '1px solid rgba(47,129,247,0.4)' : '1px solid rgba(255,255,255,0.06)',
+            zIndex: 1,
           }}
           aria-label="Toggle AI assistant"
+          aria-pressed={isChatOpen}
+          type="button"
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
           <span className="hidden sm:inline">AI Assistant</span>
         </button>
 
-        {/* Notification bell */}
-        <button
-          className="relative p-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
-          aria-label="Notifications"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-          </svg>
-          <span
-            className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full"
-            style={{ backgroundColor: '#ef4444' }}
-          />
-        </button>
+        {/* Notifications */}
+        <div ref={notifRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => { setNotifOpen(o => !o); setUserOpen(false); }}
+            className="relative p-2 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors cursor-pointer"
+            aria-label={`Notifications (${unreadCount} unread)`}
+            aria-haspopup="true"
+            aria-expanded={notifOpen}
+            type="button"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            {unreadCount > 0 && (
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500" />
+            )}
+          </button>
+
+          {notifOpen && (
+            <div
+              className="absolute right-0 mt-2 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl"
+              style={{ width: '320px', zIndex: 100, top: '100%' }}
+              role="menu"
+            >
+              <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+                <span className="text-slate-200 font-semibold text-sm">Notifications</span>
+                <span className="text-xs text-blue-400 cursor-pointer hover:underline">Mark all read</span>
+              </div>
+              {NOTIFICATIONS.map(n => (
+                <div key={n.id} className={`px-4 py-3 border-b border-slate-800 hover:bg-slate-800 cursor-pointer transition-colors last:border-0 ${n.unread ? 'bg-slate-800/40' : ''}`} role="menuitem">
+                  <div className="flex items-start gap-3">
+                    {n.unread && <span className="w-2 h-2 rounded-full bg-blue-500 mt-1.5 flex-shrink-0" />}
+                    {!n.unread && <span className="w-2 h-2 mt-1.5 flex-shrink-0" />}
+                    <div>
+                      <p className="text-slate-200 text-sm font-medium">{n.title}</p>
+                      <p className="text-slate-500 text-xs mt-0.5">{n.body}</p>
+                      <p className="text-slate-600 text-xs mt-1">{n.time}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* User avatar */}
-        <button
-          className="flex items-center gap-2 p-1 rounded-lg hover:bg-slate-800 transition-colors"
-          aria-label="User menu"
-        >
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-            style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
+        <div ref={userRef} style={{ position: 'relative' }}>
+          <button
+            onClick={() => { setUserOpen(o => !o); setNotifOpen(false); }}
+            className="flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
+            aria-label="User menu"
+            aria-haspopup="true"
+            aria-expanded={userOpen}
+            type="button"
           >
-            JD
-          </div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </button>
+            <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold bg-blue-600">
+              JD
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748b" strokeWidth="2">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+
+          {userOpen && (
+            <div
+              className="absolute right-0 mt-2 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl overflow-hidden"
+              style={{ width: '200px', zIndex: 100, top: '100%' }}
+              role="menu"
+            >
+              <div className="px-4 py-3 border-b border-slate-800">
+                <p className="text-slate-200 text-sm font-semibold">Jane Doe</p>
+                <p className="text-slate-500 text-xs">jane@streamline.ai</p>
+              </div>
+              {[
+                { label: 'Profile Settings', icon: '👤' },
+                { label: 'Preferences', icon: '⚙️' },
+                { label: 'Help & Docs', icon: '📖' },
+              ].map(item => (
+                <button key={item.label} className="w-full flex items-center gap-2 px-4 py-2.5 text-slate-300 hover:bg-slate-800 transition-colors text-sm text-left" role="menuitem" type="button">
+                  <span>{item.icon}</span>{item.label}
+                </button>
+              ))}
+              <div className="border-t border-slate-800">
+                <button className="w-full flex items-center gap-2 px-4 py-2.5 text-red-400 hover:bg-slate-800 transition-colors text-sm text-left" role="menuitem" type="button">
+                  <span>🚪</span>Sign Out
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
