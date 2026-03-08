@@ -14,7 +14,7 @@ export default function SettingsPage() {
   const [profile, setProfile] = useState({
     name: 'Jane Doe',
     email: 'jane@streamline.ai',
-    company: 'StreamlineAI Inc.',
+    company: 'Pulse Inc.',
   });
   const [profileSaved, setProfileSaved] = useState(false);
 

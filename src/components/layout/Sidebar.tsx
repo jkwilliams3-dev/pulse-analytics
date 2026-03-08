@@ -55,7 +55,7 @@ export default function Sidebar() {
         <div className="flex items-center gap-3 px-4 py-5 border-b border-slate-800" style={{ minHeight: '64px' }}>
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
+            style={{ background: '#2f81f7' }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
               <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -65,14 +65,14 @@ export default function Sidebar() {
             <span
               className="font-bold text-lg"
               style={{
-                background: 'linear-gradient(135deg, #818cf8, #a78bfa)',
+                background: 'linear-gradient(135deg, #2f81f7, #a78bfa)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
                 whiteSpace: 'nowrap',
               }}
             >
-              StreamlineAI
+              Pulse
             </span>
           )}
         </div>
@@ -87,7 +87,7 @@ export default function Sidebar() {
                 `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer relative
                 ${
                   isActive
-                    ? 'bg-indigo-600/20 text-indigo-400 border-l-2 border-indigo-500'
+                    ? 'bg-blue-600/20 text-blue-400 border-l-2 border-blue-500'
                     : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200 border-l-2 border-transparent'
                 }`
               }
@@ -106,7 +106,7 @@ export default function Sidebar() {
           <div className="flex items-center gap-3">
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}
+              style={{ background: '#2f81f7' }}
             >
               JD
             </div>
