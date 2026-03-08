@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+# StreamlineAI — AI-Powered Analytics Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**🚀 Live Demo:** https://streamline-ai-beta.vercel.app  
+**📁 GitHub:** https://github.com/jkwilliams3-dev/streamline-ai
 
-Currently, two official plugins are available:
+> A production-quality analytics dashboard with an integrated AI chat assistant. Built as a portfolio showcase for enterprise-level React + TypeScript development.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **📊 Real-time Analytics Dashboard** — KPI cards, revenue charts, traffic breakdown, device metrics, and live transaction table
+- **🤖 AI Chat Panel** — Slide-in assistant with simulated streaming responses, conversation starters, and context-aware data analysis
+- **📈 Reports Page** — Date-filtered summaries with CSV export capability
+- **⚙️ Settings Page** — Profile management, notification preferences, theme toggle, API configuration
+- **♿ 508 / WCAG Compliant** — Full ARIA support, keyboard navigation, 4.5:1+ contrast ratios
+- **📱 Fully Responsive** — Collapsible sidebar, mobile-first grid layouts
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)
+![Recharts](https://img.shields.io/badge/Recharts-2-22d3ee)
+![Zustand](https://img.shields.io/badge/Zustand-5-brown)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+```bash
+git clone https://github.com/jkwilliams3-dev/streamline-ai.git
+cd streamline-ai
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open http://localhost:5173
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Architecture
+
 ```
+src/
+├── components/
+│   ├── ai/           # ChatPanel, ChatMessage, ChatInput
+│   ├── dashboard/    # KPICard, RevenueChart, TrafficChart, DeviceChart, TransactionsTable
+│   └── layout/       # Layout, Sidebar, TopBar
+├── data/
+│   ├── mockData.ts   # Realistic sample data
+│   └── aiResponses.ts # AI response patterns
+├── pages/            # Analytics, Reports, Settings
+└── store/            # Zustand global state
+```
+
+---
+
+## Built by
+
+**Jonathan Williams** — Senior Full-Stack Developer  
+[LinkedIn](https://linkedin.com/in/jkwilliams3) · [GitHub](https://github.com/jkwilliams3-dev)
