@@ -37,8 +37,8 @@ export default function DeviceChart() {
     <div
       className="rounded-xl p-6 border h-full"
       style={{
-        backgroundColor: 'rgba(30, 41, 59, 0.5)',
-        borderColor: 'rgba(51, 65, 85, 0.5)',
+        backgroundColor: '#ffffff',
+        borderColor: '#e2e8f0',
       }}
     >
       <div className="mb-4">

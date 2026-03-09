@@ -17,9 +17,9 @@ export default function AnalyticsPage() {
         <div
           className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium"
           style={{
-            backgroundColor: 'rgba(99,102,241,0.1)',
-            border: '1px solid rgba(99,102,241,0.2)',
-            color: '#a5b4fc',
+            backgroundColor: '#eff6ff',
+            border: '1px solid #bfdbfe',
+            color: '#1d4ed8',
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

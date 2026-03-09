@@ -56,8 +56,8 @@ export default function RevenueChart() {
     <div
       className="rounded-xl p-6 border"
       style={{
-        backgroundColor: 'rgba(30, 41, 59, 0.5)',
-        borderColor: 'rgba(51, 65, 85, 0.5)',
+        backgroundColor: '#ffffff',
+        borderColor: '#e2e8f0',
       }}
     >
       <div className="flex items-center justify-between mb-6">

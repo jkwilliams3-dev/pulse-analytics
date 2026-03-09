@@ -66,8 +66,8 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
     <div
       className="rounded-xl border overflow-hidden"
       style={{
-        backgroundColor: 'rgba(30, 41, 59, 0.5)',
-        borderColor: 'rgba(51, 65, 85, 0.5)',
+        backgroundColor: '#ffffff',
+        borderColor: '#e2e8f0',
       }}
     >
       <div className="px-6 py-5 border-b border-gray-200">

@@ -8,35 +8,37 @@ interface Props {
 
 const iconMap: Record<string, React.ReactElement> = {
   dollar: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="12" y1="1" x2="12" y2="23" />
-      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
     </svg>
   ),
   users: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
     </svg>
   ),
   chart: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
     </svg>
   ),
   bag: (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-      <line x1="3" y1="6" x2="21" y2="6" />
-      <path d="M16 10a4 4 0 0 1-8 0" />
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" />
     </svg>
   ),
 };
 
+const iconColors: Record<string, { bg: string; color: string }> = {
+  dollar: { bg: '#eff6ff', color: '#2563eb' },
+  users:  { bg: '#f0fdf4', color: '#16a34a' },
+  chart:  { bg: '#fef2f2', color: '#dc2626' },
+  bag:    { bg: '#faf5ff', color: '#7c3aed' },
+};
+
 export default function KPICard({ metric, delay = 0 }: Props) {
   const isPositive = metric.change >= 0;
+  const iconStyle = iconColors[metric.icon] ?? { bg: '#eff6ff', color: '#2563eb' };
 
   return (
     <div
@@ -45,62 +47,37 @@ export default function KPICard({ metric, delay = 0 }: Props) {
       aria-label={`${metric.label}: ${metric.value}, ${metric.changeLabel} vs last month`}
     >
       <div
-        className="rounded-xl p-6 border transition-all duration-300 cursor-default group"
-        style={{
-          backgroundColor: 'rgba(30, 41, 59, 0.5)',
-          borderColor: 'rgba(51, 65, 85, 0.5)',
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(99,102,241,0.3)';
-          (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 30px rgba(99,102,241,0.05)';
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(51, 65, 85, 0.5)';
-          (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-        }}
+        className="rounded-xl p-6 border transition-all duration-200 cursor-default"
+        style={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
+        onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(37,99,235,0.08)'; (e.currentTarget as HTMLDivElement).style.borderColor = '#bfdbfe'; }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = '0 1px 3px rgba(0,0,0,0.06)'; (e.currentTarget as HTMLDivElement).style.borderColor = '#e2e8f0'; }}
       >
-        {/* Top row */}
         <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-medium text-gray-500">{metric.label}</span>
-          <div
-            className="w-10 h-10 rounded-lg flex items-center justify-center"
-            style={{
-              backgroundColor: 'rgba(99, 102, 241, 0.15)',
-              color: '#818cf8',
-            }}
-          >
+          <span style={{ fontSize: '13px', fontWeight: 500, color: '#64748b' }}>{metric.label}</span>
+          <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: iconStyle.bg, color: iconStyle.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {iconMap[metric.icon]}
           </div>
         </div>
-
-        {/* Value */}
-        <div className="mb-3">
-          <span className="text-3xl font-bold text-white">{metric.value}</span>
+        <div style={{ marginBottom: '10px' }}>
+          <span style={{ fontSize: '28px', fontWeight: 700, color: '#0f172a' }}>{metric.value}</span>
         </div>
-
-        {/* Change */}
-        <div className="flex items-center gap-2">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span
-            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-semibold"
             style={{
-              backgroundColor: isPositive
-                ? 'rgba(16, 185, 129, 0.15)'
-                : 'rgba(239, 68, 68, 0.15)',
-              color: isPositive ? '#34d399' : '#f87171',
+              display: 'inline-flex', alignItems: 'center', gap: '3px',
+              padding: '2px 8px', borderRadius: '6px', fontSize: '12px', fontWeight: 600,
+              backgroundColor: isPositive ? '#dcfce7' : '#fee2e2',
+              color: isPositive ? '#15803d' : '#b91c1c',
             }}
           >
             {isPositive ? (
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                <polyline points="18 15 12 9 6 15" />
-              </svg>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="18 15 12 9 6 15" /></svg>
             ) : (
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="6 9 12 15 18 9" /></svg>
             )}
             {metric.changeLabel}
           </span>
-          <span className="text-xs text-gray-500">vs last month</span>
+          <span style={{ fontSize: '12px', color: '#94a3b8' }}>vs last month</span>
         </div>
       </div>
     </div>
