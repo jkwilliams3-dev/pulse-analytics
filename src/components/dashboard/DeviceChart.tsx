@@ -1,5 +1,6 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { deviceBreakdown } from '../../data/mockData';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface CustomTooltipProps {
   active?: boolean;
@@ -34,17 +35,12 @@ export default function DeviceChart() {
   const total = deviceBreakdown.reduce((sum, d) => sum + d.value, 0);
 
   return (
-    <div
-      className="rounded-xl p-6 border h-full"
-      style={{
-        backgroundColor: '#ffffff',
-        borderColor: '#e2e8f0',
-      }}
-    >
-      <div className="mb-4">
-        <h3 className="text-base font-semibold text-gray-900">Device Breakdown</h3>
-        <p className="text-sm text-gray-500 mt-0.5">Sessions by device type</p>
-      </div>
+    <Card className="h-full">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-base">Device Breakdown</CardTitle>
+        <p className="text-sm text-muted-foreground">Sessions by device type</p>
+      </CardHeader>
+      <CardContent>
 
       <div className="flex items-center gap-6">
         {/* Donut chart */}
@@ -96,6 +92,7 @@ export default function DeviceChart() {
           ))}
         </div>
       </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

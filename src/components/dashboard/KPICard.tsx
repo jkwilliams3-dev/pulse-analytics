@@ -1,4 +1,6 @@
 import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import type { KPIMetric } from '../../data/mockData';
 
 interface Props {
@@ -41,45 +43,41 @@ export default function KPICard({ metric, delay = 0 }: Props) {
   const iconStyle = iconColors[metric.icon] ?? { bg: '#eff6ff', color: '#2563eb' };
 
   return (
-    <div
-      className="animate-fade-in"
-      style={{ animationDelay: `${delay}ms` }}
-      aria-label={`${metric.label}: ${metric.value}, ${metric.changeLabel} vs last month`}
-    >
-      <div
-        className="rounded-xl p-6 border transition-all duration-200 cursor-default"
-        style={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
-        onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 16px rgba(37,99,235,0.08)'; (e.currentTarget as HTMLDivElement).style.borderColor = '#bfdbfe'; }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.boxShadow = '0 1px 3px rgba(0,0,0,0.06)'; (e.currentTarget as HTMLDivElement).style.borderColor = '#e2e8f0'; }}
-      >
-        <div className="flex items-center justify-between mb-4">
-          <span style={{ fontSize: '13px', fontWeight: 500, color: '#64748b' }}>{metric.label}</span>
-          <div style={{ width: '36px', height: '36px', borderRadius: '8px', backgroundColor: iconStyle.bg, color: iconStyle.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {iconMap[metric.icon]}
+    <div className="animate-fade-in" style={{ animationDelay: `${delay}ms` }}>
+      <Card className="hover:shadow-md transition-shadow duration-200 hover:ring-blue-200">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-sm font-medium text-muted-foreground">{metric.label}</span>
+            <div
+              className="w-9 h-9 rounded-lg flex items-center justify-center"
+              style={{ backgroundColor: iconStyle.bg, color: iconStyle.color }}
+            >
+              {iconMap[metric.icon]}
+            </div>
           </div>
-        </div>
-        <div style={{ marginBottom: '10px' }}>
-          <span style={{ fontSize: '28px', fontWeight: 700, color: '#0f172a' }}>{metric.value}</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '3px',
-              padding: '2px 8px', borderRadius: '6px', fontSize: '12px', fontWeight: 600,
-              backgroundColor: isPositive ? '#dcfce7' : '#fee2e2',
-              color: isPositive ? '#15803d' : '#b91c1c',
-            }}
-          >
-            {isPositive ? (
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="18 15 12 9 6 15" /></svg>
-            ) : (
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="6 9 12 15 18 9" /></svg>
-            )}
-            {metric.changeLabel}
-          </span>
-          <span style={{ fontSize: '12px', color: '#94a3b8' }}>vs last month</span>
-        </div>
-      </div>
+          <div className="mb-2">
+            <span className="text-3xl font-bold text-foreground">{metric.value}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Badge
+              variant="outline"
+              className={`text-xs font-semibold px-2 py-0.5 ${
+                isPositive
+                  ? 'bg-green-50 text-green-700 border-green-200'
+                  : 'bg-red-50 text-red-700 border-red-200'
+              }`}
+            >
+              {isPositive ? (
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="mr-0.5"><polyline points="18 15 12 9 6 15" /></svg>
+              ) : (
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="mr-0.5"><polyline points="6 9 12 15 18 9" /></svg>
+              )}
+              {metric.changeLabel}
+            </Badge>
+            <span className="text-xs text-muted-foreground">vs last month</span>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { transactions } from '../../data/mockData';
 import type { Transaction } from '../../data/mockData';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const PAGE_SIZE = 8;
 
@@ -63,17 +64,12 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
   const rows = allRows ? filtered : filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   return (
-    <div
-      className="rounded-xl border overflow-hidden"
-      style={{
-        backgroundColor: '#ffffff',
-        borderColor: '#e2e8f0',
-      }}
-    >
-      <div className="px-6 py-5 border-b border-gray-200">
-        <h3 className="text-base font-semibold text-gray-900">Recent Transactions</h3>
-        <p className="text-sm text-gray-500 mt-0.5">{filtered.length} transactions total</p>
-      </div>
+    <Card className="overflow-hidden">
+      <CardHeader className="border-b">
+        <CardTitle className="text-base">Recent Transactions</CardTitle>
+        <p className="text-sm text-muted-foreground">{filtered.length} transactions total</p>
+      </CardHeader>
+      <CardContent className="p-0">
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
@@ -186,6 +182,7 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
           </div>
         </div>
       )}
-    </div>
+      </CardContent>
+    </Card>
   );
 }

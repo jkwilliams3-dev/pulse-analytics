@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { revenueData } from '../../data/mockData';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('en-US', {
@@ -53,29 +54,26 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 
 export default function RevenueChart() {
   return (
-    <div
-      className="rounded-xl p-6 border"
-      style={{
-        backgroundColor: '#ffffff',
-        borderColor: '#e2e8f0',
-      }}
-    >
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-base font-semibold text-gray-900">Revenue Overview</h3>
-          <p className="text-sm text-gray-500 mt-0.5">Monthly revenue vs previous year</p>
-        </div>
-        <div className="flex items-center gap-4 text-xs text-gray-500">
-          <div className="flex items-center gap-1.5">
-            <span className="w-3 h-0.5 rounded-full block" style={{ backgroundColor: '#2f81f7' }} />
-            <span>2025</span>
+    <Card>
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <div>
+            <CardTitle className="text-base">Revenue Overview</CardTitle>
+            <p className="text-sm text-muted-foreground mt-0.5">Monthly revenue vs previous year</p>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-3 h-0.5 rounded-full bg-slate-300 block" />
-            <span>2024</span>
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded-full block" style={{ backgroundColor: '#2f81f7' }} />
+              <span>2025</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-0.5 rounded-full bg-slate-300 block" />
+              <span>2024</span>
+            </div>
           </div>
         </div>
-      </div>
+      </CardHeader>
+      <CardContent>
 
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={revenueData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
@@ -116,6 +114,7 @@ export default function RevenueChart() {
           />
         </LineChart>
       </ResponsiveContainer>
-    </div>
+      </CardContent>
+    </Card>
   );
 }

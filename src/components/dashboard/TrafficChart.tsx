@@ -9,6 +9,7 @@ import {
   Cell,
 } from 'recharts';
 import { trafficSources } from '../../data/mockData';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface CustomTooltipProps {
   active?: boolean;
@@ -44,17 +45,12 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 
 export default function TrafficChart() {
   return (
-    <div
-      className="rounded-xl p-6 border"
-      style={{
-        backgroundColor: '#ffffff',
-        borderColor: '#e2e8f0',
-      }}
-    >
-      <div className="mb-6">
-        <h3 className="text-base font-semibold text-gray-900">Traffic Sources</h3>
-        <p className="text-sm text-gray-500 mt-0.5">Visitor breakdown by acquisition channel</p>
-      </div>
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-base">Traffic Sources</CardTitle>
+        <p className="text-sm text-muted-foreground">Visitor breakdown by acquisition channel</p>
+      </CardHeader>
+      <CardContent>
 
       <ResponsiveContainer width="100%" height={260}>
         <BarChart
@@ -84,6 +80,7 @@ export default function TrafficChart() {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
