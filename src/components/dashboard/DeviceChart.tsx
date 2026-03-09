@@ -23,8 +23,8 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
           className="w-2 h-2 rounded-full"
           style={{ backgroundColor: item.payload.color }}
         />
-        <span className="text-slate-300">{item.name}:</span>
-        <span className="text-white font-semibold">{item.value}%</span>
+        <span className="text-gray-500">{item.name}:</span>
+        <span className="text-gray-900 font-semibold">{item.value}%</span>
       </div>
     </div>
   );
@@ -42,7 +42,7 @@ export default function DeviceChart() {
       }}
     >
       <div className="mb-4">
-        <h3 className="text-base font-semibold text-white">Device Breakdown</h3>
+        <h3 className="text-base font-semibold text-gray-900">Device Breakdown</h3>
         <p className="text-sm text-gray-500 mt-0.5">Sessions by device type</p>
       </div>
 
@@ -75,7 +75,7 @@ export default function DeviceChart() {
           <div
             className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
           >
-            <span className="text-2xl font-bold text-white">{total}%</span>
+            <span className="text-2xl font-bold text-gray-900">{total}%</span>
             <span className="text-xs text-gray-500">Total</span>
           </div>
         </div>
@@ -89,9 +89,9 @@ export default function DeviceChart() {
                   className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                   style={{ backgroundColor: device.color }}
                 />
-                <span className="text-sm text-slate-300">{device.name}</span>
+                <span className="text-sm text-gray-600">{device.name}</span>
               </div>
-              <span className="text-sm font-semibold text-white">{device.value}%</span>
+              <span className="text-sm font-semibold text-gray-900">{device.value}%</span>
             </div>
           ))}
         </div>

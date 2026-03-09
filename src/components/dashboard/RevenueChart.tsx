@@ -43,8 +43,8 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
             className="w-2 h-2 rounded-full flex-shrink-0"
             style={{ backgroundColor: entry.color }}
           />
-          <span className="text-slate-300">{entry.name}:</span>
-          <span className="text-white font-semibold">{formatCurrency(entry.value)}</span>
+          <span className="text-gray-500">{entry.name}:</span>
+          <span className="text-gray-900 font-semibold">{formatCurrency(entry.value)}</span>
         </div>
       ))}
     </div>
@@ -62,16 +62,16 @@ export default function RevenueChart() {
     >
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-base font-semibold text-white">Revenue Overview</h3>
+          <h3 className="text-base font-semibold text-gray-900">Revenue Overview</h3>
           <p className="text-sm text-gray-500 mt-0.5">Monthly revenue vs previous year</p>
         </div>
         <div className="flex items-center gap-4 text-xs text-gray-500">
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-0.5 rounded-full bg-indigo-500 block" />
+            <span className="w-3 h-0.5 rounded-full block" style={{ backgroundColor: '#2f81f7' }} />
             <span>2025</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-0.5 rounded-full bg-slate-500 block" />
+            <span className="w-3 h-0.5 rounded-full bg-slate-300 block" />
             <span>2024</span>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function RevenueChart() {
 
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={revenueData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
           <XAxis
             dataKey="month"
             tick={{ fill: '#64748b', fontSize: 12 }}
@@ -99,10 +99,10 @@ export default function RevenueChart() {
             type="monotone"
             dataKey="revenue"
             name="2025"
-            stroke="#6366f1"
+            stroke="#2f81f7"
             strokeWidth={2.5}
-            dot={{ fill: '#6366f1', r: 3, strokeWidth: 0 }}
-            activeDot={{ r: 5, fill: '#818cf8' }}
+            dot={{ fill: '#2f81f7', r: 3, strokeWidth: 0 }}
+            activeDot={{ r: 5, fill: '#60a5fa' }}
           />
           <Line
             type="monotone"

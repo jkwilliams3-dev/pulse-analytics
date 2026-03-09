@@ -34,7 +34,7 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
           className="w-2 h-2 rounded-full"
           style={{ backgroundColor: item.payload.color }}
         />
-        <span className="text-white font-semibold">
+        <span className="text-gray-900 font-semibold">
           {new Intl.NumberFormat('en-US').format(item.value)} visitors
         </span>
       </div>
@@ -52,7 +52,7 @@ export default function TrafficChart() {
       }}
     >
       <div className="mb-6">
-        <h3 className="text-base font-semibold text-white">Traffic Sources</h3>
+        <h3 className="text-base font-semibold text-gray-900">Traffic Sources</h3>
         <p className="text-sm text-gray-500 mt-0.5">Visitor breakdown by acquisition channel</p>
       </div>
 
@@ -62,7 +62,7 @@ export default function TrafficChart() {
           margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
           barCategoryGap="35%"
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" horizontal={true} vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={true} vertical={false} />
           <XAxis
             dataKey="name"
             tick={{ fill: '#64748b', fontSize: 11 }}
@@ -76,7 +76,7 @@ export default function TrafficChart() {
             tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`}
             width={40}
           />
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(99,102,241,0.05)' }} />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(47,129,247,0.05)' }} />
           <Bar dataKey="visitors" radius={[4, 4, 0, 0]}>
             {trafficSources.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.color} />

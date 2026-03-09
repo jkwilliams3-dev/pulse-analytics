@@ -86,17 +86,17 @@ export const revenueData: RevenueDataPoint[] = [
 ];
 
 export const trafficSources: TrafficSource[] = [
-  { name: 'Direct', visitors: 42300, color: '#6366f1' },
-  { name: 'Organic Search', visitors: 38700, color: '#8b5cf6' },
-  { name: 'Social Media', visitors: 24100, color: '#a78bfa' },
-  { name: 'Referral', visitors: 18900, color: '#c4b5fd' },
-  { name: 'Email', visitors: 12600, color: '#ddd6fe' },
+  { name: 'Direct', visitors: 42300, color: '#2f81f7' },
+  { name: 'Organic Search', visitors: 38700, color: '#60a5fa' },
+  { name: 'Social Media', visitors: 24100, color: '#93c5fd' },
+  { name: 'Referral', visitors: 18900, color: '#3b82f6' },
+  { name: 'Email', visitors: 12600, color: '#bfdbfe' },
 ];
 
 export const deviceBreakdown: DeviceBreakdown[] = [
-  { name: 'Desktop', value: 58, color: '#6366f1' },
-  { name: 'Mobile', value: 32, color: '#8b5cf6' },
-  { name: 'Tablet', value: 10, color: '#a78bfa' },
+  { name: 'Desktop', value: 58, color: '#2f81f7' },
+  { name: 'Mobile', value: 32, color: '#60a5fa' },
+  { name: 'Tablet', value: 10, color: '#93c5fd' },
 ];
 
 export const transactions: Transaction[] = [

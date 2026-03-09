@@ -71,14 +71,14 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
       }}
     >
       <div className="px-6 py-5 border-b border-gray-200">
-        <h3 className="text-base font-semibold text-white">Recent Transactions</h3>
+        <h3 className="text-base font-semibold text-gray-900">Recent Transactions</h3>
         <p className="text-sm text-gray-500 mt-0.5">{filtered.length} transactions total</p>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr style={{ borderBottom: '1px solid rgba(51,65,85,0.5)' }}>
+            <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
               {['Date', 'Customer', 'Company', 'Category', 'Amount', 'Status'].map((h) => (
                 <th
                   key={h}
@@ -97,9 +97,9 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
                 <tr
                   key={tx.id}
                   className="transition-colors duration-150"
-                  style={{ borderBottom: '1px solid rgba(30,41,59,0.8)' }}
+                  style={{ borderBottom: '1px solid #f1f5f9' }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLTableRowElement).style.backgroundColor = 'rgba(51,65,85,0.3)';
+                    (e.currentTarget as HTMLTableRowElement).style.backgroundColor = '#f8fafc';
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLTableRowElement).style.backgroundColor = 'transparent';
@@ -118,15 +118,15 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
                     <span
                       className="px-2.5 py-0.5 rounded-md text-xs font-medium"
                       style={{
-                        backgroundColor: 'rgba(99,102,241,0.1)',
-                        color: '#818cf8',
-                        border: '1px solid rgba(99,102,241,0.2)',
+                        backgroundColor: 'rgba(47,129,247,0.08)',
+                        color: '#2f81f7',
+                        border: '1px solid rgba(47,129,247,0.2)',
                       }}
                     >
                       {tx.category}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-white font-semibold whitespace-nowrap">
+                  <td className="px-6 py-4 text-gray-900 font-semibold whitespace-nowrap">
                     {formatAmount(tx.amount)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -152,7 +152,7 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
       {!allRows && totalPages > 1 && (
         <div
           className="px-6 py-4 flex items-center justify-between border-t"
-          style={{ borderColor: 'rgba(51,65,85,0.5)' }}
+          style={{ borderColor: '#e2e8f0' }}
         >
           <span className="text-sm text-gray-500">
             Showing {page * PAGE_SIZE + 1}–{Math.min((page + 1) * PAGE_SIZE, filtered.length)} of{' '}
@@ -164,9 +164,9 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
               disabled={page === 0}
               className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
-                backgroundColor: 'rgba(51,65,85,0.5)',
-                color: '#64748b',
-                border: '1px solid rgba(71,85,105,0.5)',
+                backgroundColor: '#f1f5f9',
+                color: '#475569',
+                border: '1px solid #e2e8f0',
               }}
             >
               Previous
@@ -176,9 +176,9 @@ export default function TransactionsTable({ allRows = false, filterStatus = 'all
               disabled={page >= totalPages - 1}
               className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
-                backgroundColor: 'rgba(51,65,85,0.5)',
-                color: '#64748b',
-                border: '1px solid rgba(71,85,105,0.5)',
+                backgroundColor: '#f1f5f9',
+                color: '#475569',
+                border: '1px solid #e2e8f0',
               }}
             >
               Next
